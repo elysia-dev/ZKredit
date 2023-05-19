@@ -23,38 +23,38 @@ export default function Layout({ children }) {
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <title>zkSudoku</title>
+        <title>ZKredit</title>
         <meta name="title" content="zkSudoku" />
-        <meta name="description" content="Zero Knowledge Sudoku Game" />
+        <meta name="description" content="Zero Knowledge Credit Lending Protocol" />
         <meta name="theme-color" content="#ea580c" />
 
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://zk-sudoku.vercel.app/" />
-        <meta property="twitter:title" content="zkSudoku" />
+        <meta property="twitter:url" content="https://zkredit.vercel.app/" />
+        <meta property="twitter:title" content="ZKredit" />
         <meta
           property="twitter:description"
-          content="Zero Knowledge Sudoku Game"
+          content="Zero Knowledge Credit Lending Protocol "
         />
-        <meta property="twitter:image" content="https://zk-sudoku.vercel.app/socialMedia.png" />
+        <meta property="twitter:image" content="https://zkredit.vercel.app/socialMedia.png" />
 
         {/* Open Graph */}
         <meta property="og:type" content="website" key="ogtype" />
         <meta
           property="og:url"
-          content="https://zk-sudoku.vercel.app/"
+          content="https://zkredit.vercel.app/"
           key="ogurl"
         />
-        <meta property="og:image" content="https://zk-sudoku.vercel.app/socialMedia.png" key="ogimage" />
-        <meta property="og:title" content="zkSudoku" key="ogtitle" />
+        <meta property="og:image" content="https://zkredit.vercel.app/socialMedia.png" key="ogimage" />
+        <meta property="og:title" content="zkredit" key="ogtitle" />
         <meta
           property="og:description"
-          content="Zero Knowledge Sudoku Game"
+          content="Zero Knowledge Credit Lending Protocol"
           key="ogdesc"
         />
       </Head>
       <WagmiConfig client={client}>
-        <div className="flex flex-col min-h-screen px-2 bg-slate-900 text-slate-300">
+        <div className="flex flex-col min-h-screen px-2 text-slate-300">
           <Header />
           <main className="mb-auto">{children}</main>
           <Footer />

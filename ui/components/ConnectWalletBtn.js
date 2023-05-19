@@ -19,7 +19,7 @@ export default function ConnectWalletBtn() {
   if (!dataAccount?.address) {
     return (
       <button
-        className="text-lg font-medium rounded-md px-5 py-3 bg-gradient-to-r from-sky-600 to-emerald-600 hover:from-sky-500 hover:to-emerald-500"
+        className="text-lg text-white font-medium rounded-md px-5 py-3 bg-gradient-to-r from-amber-500 to-amber-200 hover:from-yellow-500 hover:to-amber-100"
         onClick={() => {
           connect(connectors[0]);
         }}
@@ -30,7 +30,7 @@ export default function ConnectWalletBtn() {
   } else if (activeChain?.id.toString() !== networks.selectedChain) {
     return (
       <button
-        className="text-lg font-medium rounded-md px-5 py-3 bg-gradient-to-r from-sky-600 to-emerald-600 hover:from-sky-500 hover:to-emerald-500"
+        className="text-lg font-medium rounded-md px-5 py-3 from-yellow-400 to-amber-200 hover:from-yellow-400 hover:to-amber-100"
         onClick={async () => {
           await switchNetwork();
         }}
