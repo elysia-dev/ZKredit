@@ -8,5 +8,9 @@ typechain
 cache
 artifacts
 
-
 zkproof
+
+# Foundry
+## Compiler files
+out/
+cache_forge

@@ -1,4 +1,5 @@
 require("@nomiclabs/hardhat-waffle");
+require("@nomicfoundation/hardhat-foundry");
 require("hardhat-gas-reporter");
 require("dotenv").config();
 
@@ -20,7 +21,7 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
  */
 module.exports = {
   solidity: {
-    version: "0.8.4",
+    version: "0.8.18",
     settings: {
       optimizer: {
         enabled: true,
