@@ -36,7 +36,7 @@ where `yourPrivateKey` is the private key of your wallet.
 To deploy on Sepolia run:
 
 ```bash
-npx hardhat run scripts/deploy.js --network sepolia
+npx hardhat run scripts/deploy-airdrop.js --network sepolia
 ```
 
 ## zkSudoku contracts graph

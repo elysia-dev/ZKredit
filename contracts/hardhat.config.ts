@@ -1,5 +1,7 @@
-require("@nomiclabs/hardhat-waffle");
-require("hardhat-gas-reporter");
+import {task} from "hardhat/config";
+
+import("@nomiclabs/hardhat-waffle");
+import("hardhat-gas-reporter");
 require("dotenv").config();
 
 // This is a sample Hardhat task. To learn how to create your own go to
@@ -18,7 +20,7 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 /**
  * @type import('hardhat/config').HardhatUserConfig
  */
-module.exports = {
+const config = {
   solidity: {
     version: "0.8.18",
     settings: {
@@ -42,3 +44,5 @@ module.exports = {
     apiKey: `${process.env.ETHERSCAN_API_KEY}`
   }
 };
+
+export default config;
