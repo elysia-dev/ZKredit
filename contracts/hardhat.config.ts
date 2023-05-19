@@ -1,9 +1,10 @@
 /** @type import('hardhat/config').HardhatUserConfig */
 import * as dotenv from "dotenv"
 import "@nomiclabs/hardhat-ethers";
+import "@nomicfoundation/hardhat-verify"
 import "hardhat-deploy"
 // import "@nomicfoundation/hardhat-toolbox"
-// import "./tasks";
+import "./tasks";
 
 dotenv.config()
 

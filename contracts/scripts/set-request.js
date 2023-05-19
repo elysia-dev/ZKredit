@@ -31,7 +31,7 @@ async function main() {
   };
 
   // add the address of the contract just deployed
-  ERC20VerifierAddress = "0xC5076dfC590fE8B50E34933906aa32eb69ed69f6";
+  ERC20VerifierAddress = "0x218c786Ca89c7E24128B5ca4031E3485528F7b99";
 
   let erc20Verifier = await hre.ethers.getContractAt(
     "ERC20Verifier",
