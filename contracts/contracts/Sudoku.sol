@@ -2,12 +2,10 @@
 pragma solidity ^0.8.18;
 
 interface IVerifier {
-    function verifyProof(
-        uint256[2] memory a,
-        uint256[2][2] memory b,
-        uint256[2] memory c,
-        uint256[81] memory input
-    ) external view returns (bool);
+    function verifyProof(uint256[2] memory a, uint256[2][2] memory b, uint256[2] memory c, uint256[81] memory input)
+        external
+        view
+        returns (bool);
 }
 
 contract Sudoku {
@@ -53,20 +51,15 @@ contract Sudoku {
         verifierAddr = _verifierAddr;
     }
 
-    function verifyProof(
-        uint256[2] memory a,
-        uint256[2][2] memory b,
-        uint256[2] memory c,
-        uint256[81] memory input
-    ) public view returns (bool) {
-        return IVerifier(verifierAddr).verifyProof(a, b, c, input);
-    }
-
-    function verifySudokuBoard(uint256[81] memory board)
-        private
+    function verifyProof(uint256[2] memory a, uint256[2][2] memory b, uint256[2] memory c, uint256[81] memory input)
+        public
         view
         returns (bool)
     {
+        return IVerifier(verifierAddr).verifyProof(a, b, c, input);
+    }
+
+    function verifySudokuBoard(uint256[81] memory board) private view returns (bool) {
         bool isEqual = true;
         for (uint256 i = 0; i < sudokuBoardList.length; ++i) {
             isEqual = true;
@@ -85,40 +78,24 @@ contract Sudoku {
         return isEqual;
     }
 
-    function verifySudoku(
-        uint256[2] memory a,
-        uint256[2][2] memory b,
-        uint256[2] memory c,
-        uint256[81] memory input
-    ) public view returns (bool) {
+    function verifySudoku(uint256[2] memory a, uint256[2][2] memory b, uint256[2] memory c, uint256[81] memory input)
+        public
+        view
+        returns (bool)
+    {
         require(verifySudokuBoard(input), "This board does not exist");
         require(verifyProof(a, b, c, input), "Filed proof check");
         return true;
     }
 
-    function pickRandomBoard(string memory stringTime)
-        private
-        view
-        returns (uint8[9][9] memory)
-    {
+    function pickRandomBoard(string memory stringTime) private view returns (uint8[9][9] memory) {
         uint256 randPosition = uint256(
-            keccak256(
-                abi.encodePacked(
-                    block.difficulty,
-                    block.timestamp,
-                    msg.sender,
-                    stringTime
-                )
-            )
+            keccak256(abi.encodePacked(block.difficulty, block.timestamp, msg.sender, stringTime))
         ) % sudokuBoardList.length;
         return sudokuBoardList[randPosition];
     }
 
-    function generateSudokuBoard(string memory stringTime)
-        public
-        view
-        returns (uint8[9][9] memory)
-    {
+    function generateSudokuBoard(string memory stringTime) public view returns (uint8[9][9] memory) {
         return pickRandomBoard(stringTime);
     }
 }
