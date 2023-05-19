@@ -46,7 +46,7 @@ export default function ConnectWalletBtn() {
         </div>
         <button
           onClick={() => disconnect()}
-          className="text-lg font-medium rounded-md px-5 py-3 bg-gradient-to-r from-sky-600 to-emerald-600 hover:from-sky-500 hover:to-emerald-500"
+          className="text-lg text-white font-medium rounded-md px-5 py-3 bg-gradient-to-r from-amber-600 to-amber-200 hover:from-amber-500 hover:to-amber-100"
         >
           Disconnect
         </button>
