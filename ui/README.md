@@ -1,6 +1,6 @@
-# zkSudoku frontend
+# ZKredit frontend
 
-This folder contains the frontend of the zkSudoku application.
+This folder contains the frontend of the ZKredit application.
 
 The frontend is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) and deployed on [Vercel](https://github.com/vercel/vercel).
 

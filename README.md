@@ -1,16 +1,8 @@
-# zkSudoku
+# ZKredit
 
-zkSudoku is a platform that allows users to play zk (zero knowledge) Sudoku games.
-
-This project is part of the article: [How to create a Zero Knowledge DApp: From zero to production](https://vivianblog.hashnode.dev/how-to-create-a-zero-knowledge-dapp-from-zero-to-production).
+ZKedit is a credit defi that allows borrowers to borrow crypto with their credit issued by a trust party.
 
 ## Run Locally
-
-### Clone the Repository
-
-```bash
-git clone https://github.com/vplasencia/zkSudoku.git
-```
 
 ### Run circuits
 
@@ -32,12 +24,12 @@ cd contracts
 
 Then, follow the intructions in the [README file](/contracts/README.md) in the `contracts` folder.
 
-### Run zksudoku-ui
+### Run ui
 
-To run the frontend, go inside the `zksudoku-ui` folder:
+To run the frontend, go inside the `ui` folder:
 
 ```bash
-cd zksudoku-ui
+cd ui
 ```
 
-Then, follow the intructions in the [README file](/zksudoku-ui/README.md) in the `zksudoku-ui` folder.
+Then, follow the intructions in the [README file](/README.md) in the `ui` folder.
