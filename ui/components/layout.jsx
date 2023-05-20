@@ -1,21 +1,19 @@
 import Header from "./header";
 import Footer from "./footer";
 import Head from "next/head";
-import Script from "next/script";
-import { WagmiConfig, createClient } from "wagmi";
-import { providers } from "ethers";
+import { configureChains, WagmiConfig, createConfig } from "wagmi";
+import { publicProvider } from 'wagmi/providers/public'
+import { polygonMumbai } from 'wagmi/chains'
 
-import networks from "../utils/networks.json";
+const { chains, publicClient, webSocketPublicClient } = configureChains(
+  [polygonMumbai],
+  [publicProvider()],
+)
 
-// Provider that will be used when no wallet is connected (aka no signer)
-const provider = providers.getDefaultProvider(
-  networks[networks.selectedChain].rpcUrls[0]
-);
-
-const client = createClient({
-  autoConnect: true,
-  provider,
-});
+const config = createConfig({
+  publicClient,
+  webSocketPublicClient,
+})
 
 export default function Layout({ children }) {
   return (
@@ -55,7 +53,7 @@ export default function Layout({ children }) {
         />
       </Head>
       <div id='modal-root' />
-      <WagmiConfig client={client}>
+      <WagmiConfig config={config}>
         <div className="flex flex-col min-h-screen px-2 text-slate-300">
           <Header />
           <main className="mb-auto">{children}</main>
