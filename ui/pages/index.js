@@ -39,7 +39,7 @@ export default function Home() {
   return (
     <div>
       <div className="flex justify-center items-center">
-        <span className="mb-10 text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-amber-200">
+        <span className="mb-10 text-3xl font-bold text-transparent bg-clip-text bg-blue-500">
           Zero Knowledge Credit Lending Protocol 
         </span>
       </div>
@@ -51,7 +51,7 @@ export default function Home() {
             style={{ width: 256 }}
             value={JSON.stringify(qrProofRequestJson)}
           />
-          <a className="flex justify-center items-center space-x-1 transition-colors duration-150 mb-4 text-lg text-slate-300 font-semibold py-3 px-5 rounded-md bg-gradient-to-r from-amber-500 to-amber-200 hover:from-yellow-500 hover:to-amber-100">
+          <a className="flex justify-center items-center space-x-1 transition-colors duration-150 mb-4 text-lg text-slate-300 font-semibold py-3 px-5 rounded-md bg-blue-500">
             <span className="text-white">Request</span>
           </a>
         </div>

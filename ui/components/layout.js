@@ -23,6 +23,7 @@ export default function Layout({ children }) {
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="stylesheet" href="https://unpkg.com/@themesberg/flowbite@1.2.0/dist/flowbite.min.css" />
         <title>ZKredit</title>
         <meta name="title" content="zkSudoku" />
         <meta name="description" content="Zero Knowledge Credit Lending Protocol" />
@@ -53,6 +54,7 @@ export default function Layout({ children }) {
           key="ogdesc"
         />
       </Head>
+      <div id='modal-root' />
       <WagmiConfig client={client}>
         <div className="flex flex-col min-h-screen px-2 text-slate-300">
           <Header />
