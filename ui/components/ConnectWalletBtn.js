@@ -18,39 +18,15 @@ export default function ConnectWalletBtn() {
 
   if (!dataAccount?.address) {
     return (
-      <button
-        className="text-lg text-white font-medium rounded-md px-5 py-3 bg-blue-500"
-        onClick={() => {
-          connect(connectors[0]);
-        }}
-      >
-        <span>Connect Wallet</span>
-      </button>
+      <a onClick={() => { connect(connectors[0]) }} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 md:px-5 md:py-2.5 mr-1 md:mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 cursor-pointer">Connect Wallet</a>
     );
   } else if (activeChain?.id.toString() !== networks.selectedChain) {
     return (
-      <button
-        className="text-lg font-medium rounded-md px-5 py-3 bg-blue-500"
-        onClick={async () => {
-          await switchNetwork();
-        }}
-      >
-        <span>Switch Network</span>
-      </button>
+      <a onClick={() => { switchNetwork() }} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 md:px-5 md:py-2.5 mr-1 md:mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 cursor-pointer">Switch Network </a>
     );
   } else {
     return (
-      <div className="flex flex-wrap gap-5 justify-center items-center">
-        <div className="p-3 bg-slate-700 text-lg font-medium rounded-md">
-          <span>{truncateEthAddress(dataAccount?.address)}</span>
-        </div>
-        <button
-          onClick={() => disconnect()}
-          className="text-lg text-white font-medium rounded-md px-5 py-3 bg-blue-500"
-        >
-          Disconnect
-        </button>
-      </div>
+      <a onClick={() => { disconnect() }} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 md:px-5 md:py-2.5 mr-1 md:mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 cursor-pointer">{truncateEthAddress(dataAccount?.address)}</a>
     );
   }
 }
