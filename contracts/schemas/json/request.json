@@ -19,13 +19,19 @@
           "allowedIssuers": [
             "*"
           ],
-          "context": "https://raw.githubusercontent.com/iden3/claim-schema-vocab/main/schemas/json-ld/kyc-v3.json-ld",
+          "context": "https://raw.githubusercontent.com/elysia-dev/ZKredit/main/contracts/schemas/json-ld/kyc-v1.jsonld",
           "credentialSubject": {
-            "birthday": {
-              "$lt": 20020101
+            "creditScore": {
+              "$gt": 800
+            },
+            "averageIncome": {
+              "$gt": 36000
+            },
+            "totalDebt": {
+              "$lt": 50000
             }
           },
-          "type": "KYCAgeCredential"
+          "type": "KYCPersonalCreditCredential"
         }
       }
     ]

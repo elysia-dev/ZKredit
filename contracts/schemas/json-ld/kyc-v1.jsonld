@@ -21,7 +21,11 @@
           "averageIncome": {
             "@id": "kyc-vocab:averageIncome",
             "@type": "xsd:integer"
-          }
+          },
+          "totalDebt": {
+            "@id": "kyc-vocab:totalDebt",
+            "@type": "xsd:integer"
+          },
         }
       }
     }
