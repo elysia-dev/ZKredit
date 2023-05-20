@@ -25,7 +25,7 @@
           "totalDebt": {
             "@id": "kyc-vocab:totalDebt",
             "@type": "xsd:integer"
-          },
+          }
         }
       }
     }
