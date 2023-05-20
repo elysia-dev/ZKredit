@@ -2,22 +2,60 @@ import BorrowItem from "../components/BorrowItem";
 import { initFlowbite } from 'flowbite';
 import { useEffect, useState } from "react";
 import CheckItem from "../components/CheckItem";
+import lendingAbi from "../utils/abiFiles/lendingpool.json"
+import { useContractWrite, useAccount, useWaitForTransaction } from 'wagmi'
+import { utils } from "ethers";
+import toast from 'react-hot-toast';
 
 export default function Home() {
   useEffect(() => {
     initFlowbite()
   }, [])
 
+  const { address } = useAccount();
+
   const [proof, setProof] = useState({
-    credit: false,
-    debtLevel: false,
-    expense: false,
-    income: false,
-    tenure: false,
+    credit: true,
+    debtLevel: true,
+    expense: true,
+    income: true,
+    tenure: true,
     professional: true,
   })
 
   const [modalPage, setModalPage] = useState(0)
+  const [amount, setAmount] = useState(0)
+
+  const { data: contractWrite, isLoading, isSuccess, write } = useContractWrite({
+    address: process.env.NEXT_PUBLIC_LENDING_POOL_ADDRESS,
+    abi: lendingAbi,
+    functionName: 'borrow',
+  })
+
+  const { data: txRes, isLoading: txLoading } = useWaitForTransaction({
+    hash: contractWrite?.hash,
+  })
+
+  const borrow = async () => {
+    if(!address || !amount ) return;
+
+    write({ args: [address, utils.parseEther(amount)], from: address })
+  }
+
+  useEffect(() => {
+    if(txLoading){
+      toast.loading("Waiting for confirmation.")
+      
+    } else {
+      toast.dismiss()
+    }
+  }, [txLoading])
+
+  useEffect(() => {
+    if(txRes){
+      toast.success("Confirmed!")
+    }
+  }, [txRes])
 
   return (
     <div>
@@ -64,7 +102,7 @@ export default function Home() {
                   <form>
                     <div className="mb-6">
                       <label htmlFor="amount" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Loan Amount ($)</label>
-                      <input type="number" id="amount" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="100000" required />
+                      <input onChange={(e) => {setAmount(e.target.value)}} type="number" id="amount" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="100000" required />
                     </div>
                     <div className="mb-6">
                       <label htmlFor="period" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Loan Term (days)</label>
@@ -84,7 +122,7 @@ export default function Home() {
               */}
               {
                 modalPage === 1 &&
-                <button onClick={() => { console.log("TX subm") }} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Borrow</button>
+                <button onClick={() => { borrow() }} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Borrow</button>
               }
               <button onClick={() => { setModalPage(0)}} data-modal-hide="borrowModal" type="button" className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Close</button>
             </div>

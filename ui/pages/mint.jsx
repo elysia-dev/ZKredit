@@ -3,13 +3,8 @@ import { useQRCode } from 'next-qrcode';
 import { initFlowbite } from 'flowbite';
 import { useEffect } from "react";
 import nftAbi from '../utils/abiFiles/nft.json'
-import { useContractRead, useContractReads, useAccount, useContractEvent } from 'wagmi'
+import { useContractRead, useContractReads, useAccount } from 'wagmi'
 import _ from 'lodash'
-import { ethers, constants } from 'ethers'
-
-// more info on query based requests: https://0xpolygonid.github.io/tutorials/wallet/proof-generation/types-of-auth-requests-and-proofs/#query-based-request
-// qrValueProofRequestExample: https://github.com/0xPolygonID/tutorial-examples/blob/main/on-chain-verification/qrValueProofRequestExample.json
-const transferInterface= new ethers.utils.Interface(["event Transfer(address from, address to, uint256 tokenId)" ]);
 
 const qrProofRequestJson = {
   id: "7f38a193-0918-4a48-9fac-36adfdb8b542",
@@ -34,7 +29,7 @@ const qrProofRequestJson = {
             "https://raw.githubusercontent.com/elysia-dev/ZKredit/main/contracts/schemas/json-ld/kyc-v2.jsonld",
           credentialSubject: {
             creditScore: {
-              $gt: 100
+              $gt: 900
             }
           },
           type: "KYCPersonalCreditCredential"
@@ -55,9 +50,10 @@ export default function Home() {
     address: process.env.NEXT_PUBLIC_NFT_ADDRESS,
     abi: nftAbi,
     functionName: 'nextId',
+    isRefetching: true,
     onError(error) {
       console.log(error)
-    }
+    },
   })
 
   const { data: owners, isLoading: ownersLoading, error: nftsError } = useContractReads({
@@ -66,32 +62,11 @@ export default function Home() {
         address: process.env.NEXT_PUBLIC_NFT_ADDRESS,
         abi: nftAbi,
         functionName: 'ownerOf',
+        isRefetching: true,
         args: [id]
       }
     }) : []
-  })
-
-
-  useContractEvent({
-    address: process.env.NEXT_PUBLIC_NFT_ADDRESS,
-    abi: nftAbi,
-    eventName: 'Transfer',
-    listener(log) {
-      let parsed = transferInterface.parseLog(log)
-      const { from, to, tokenId } = parsed.args
-
-      console.log(from)
-      console.log(to)
-      console.log(tokenId)
-
-      if (
-        log.topics[1] === constants.AddressZero ||
-        log.topics[2] === address
-      ) {
-        console.log("hello!!")
-      }
-    },
-  })
+  }, [nextId])
 
   return (
     <div>

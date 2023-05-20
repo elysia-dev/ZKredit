@@ -4,6 +4,7 @@ import Head from "next/head";
 import { configureChains, WagmiConfig, createConfig } from "wagmi";
 import { publicProvider } from 'wagmi/providers/public'
 import { polygonMumbai } from 'wagmi/chains'
+import { Toaster } from 'react-hot-toast';
 
 const { chains, publicClient, webSocketPublicClient } = configureChains(
   [polygonMumbai],
@@ -58,6 +59,7 @@ export default function Layout({ children }) {
           <Header />
           <main className="mb-auto">{children}</main>
           <Footer />
+          <Toaster />
         </div>
       </WagmiConfig>
     </>

@@ -8,17 +8,17 @@ export default function Home() {
       </div>
       <div className="flex justify-center items-center">
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-          <div href="#" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-            <p class="font-normal text-gray-700 dark:text-gray-400">Utilizing Polygon ID</p>
-            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Trusted Personal Credit Lending</h5>
+          <div href="#" className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+            <p className="font-normal text-gray-700 dark:text-gray-400">Utilizing Polygon ID</p>
+            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Trusted Personal Credit Lending</h5>
           </div>
-          <div href="#" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-            <p class="font-normal text-gray-700 dark:text-gray-400">Breaking away from uniform rates</p>
-            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Offering diverse criteria and interest rates</h5>
+          <div href="#" className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+            <p className="font-normal text-gray-700 dark:text-gray-400">Breaking away from uniform rates</p>
+            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Offering diverse criteria and interest rates</h5>
           </div>
-          <div href="#" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-            <p class="font-normal text-gray-700 dark:text-gray-400">In Web3.0</p>
-            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Providing a new investment opportunity</h5>
+          <div href="#" className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+            <p className="font-normal text-gray-700 dark:text-gray-400">In Web3.0</p>
+            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Providing a new investment opportunity</h5>
           </div>
         </div>
       </div>
