@@ -5,17 +5,21 @@
       "@protected": true,
       "id": "@id",
       "type": "@type",
-      "KYCCreditCredential": {
-        "@id": "https://raw.githubusercontent.com/iden3/claim-schema-vocab/main/schemas/json-ld/kyc-v3.json-ld#KYCAgeCredential",
+      "KYCPersonalCreditCredential": {
+        "@id": "https://raw.githubusercontent.com/elysia-dev/ZKredit/main/contracts/schemas/json-ld/kyc-v1.json-ld#KYCPersonalCredential",
         "@context": {
           "@version": 1.1,
           "@protected": true,
           "id": "@id",
           "type": "@type",
-          "kyc-vocab": "https://github.com/iden3/claim-schema-vocab/blob/main/credentials/kyc.md#",
+          "kyc-vocab": "https://github.com/elysia-dev/claim-schema-vocab/blob/main/credentials/kyc.md#",
           "xsd": "http://www.w3.org/2001/XMLSchema#",
-          "birthday": {
-            "@id": "kyc-vocab:birthday",
+          "creditScore": {
+            "@id": "kyc-vocab:creditScore",
+            "@type": "xsd:integer"
+          },
+          "averageIncome": {
+            "@id": "kyc-vocab:averageIncome",
             "@type": "xsd:integer"
           },
           "documentType": {
