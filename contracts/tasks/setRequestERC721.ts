@@ -24,7 +24,7 @@ export const setRequestERC721Task = task("setRequestERC721", "set request for ER
       // Query language: https://0xpolygonid.github.io/tutorials/verifier/verification-library/zk-query-language/
       // you can run https://go.dev/play/p/rnrRbxXTRY6 to get schema hash and claimPathKey using YOUR schema
 
-      const requestId = taskArgs.requestId;
+      const requestId = parseInt(taskArgs.requestId);
       let query: any;
 
       if (requestId === 1) {

@@ -59,11 +59,6 @@ contract ERC721Verifier is ERC721, ZKPVerifier {
         uint256[] memory inputs,
         ICircuitValidator validator
     ) internal override {
-        require(
-            requestId == TRANSFER_REQUEST_ID && addressToId[_msgSender()] == 0,
-            "proof can not be submitted more than once"
-        );
-
         uint256 userId = inputs[1];
 
         if (idToAddress[userId] == address(0) && addressToId[_msgSender()] == 0) {
