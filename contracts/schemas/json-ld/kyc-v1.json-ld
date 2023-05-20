@@ -21,10 +21,6 @@
           "averageIncome": {
             "@id": "kyc-vocab:averageIncome",
             "@type": "xsd:integer"
-          },
-          "documentType": {
-            "@id": "kyc-vocab:documentType",
-            "@type": "xsd:integer"
           }
         }
       }
