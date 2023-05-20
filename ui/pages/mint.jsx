@@ -2,8 +2,14 @@ import Item from "../components/Item";
 import { useQRCode } from 'next-qrcode';
 import { initFlowbite } from 'flowbite';
 import { useEffect } from "react";
+import nftAbi from '../utils/abiFiles/nft.json'
+import { useContractRead, useContractReads, useAccount, useContractEvent } from 'wagmi'
+import _ from 'lodash'
+import { ethers, constants } from 'ethers'
 
-const deployedContractAddress = "0x218c786ca89c7e24128b5ca4031e3485528f7b99";
+// more info on query based requests: https://0xpolygonid.github.io/tutorials/wallet/proof-generation/types-of-auth-requests-and-proofs/#query-based-request
+// qrValueProofRequestExample: https://github.com/0xPolygonID/tutorial-examples/blob/main/on-chain-verification/qrValueProofRequestExample.json
+const transferInterface= new ethers.utils.Interface(["event Transfer(address from, address to, uint256 tokenId)" ]);
 
 const qrProofRequestJson = {
   id: "7f38a193-0918-4a48-9fac-36adfdb8b542",
@@ -13,7 +19,7 @@ const qrProofRequestJson = {
   body: {
     reason: "airdrop participation",
     transaction_data: {
-      contract_address: deployedContractAddress,
+      contract_address: process.env.NEXT_PUBLIC_NFT_ADDRESS,
       method_id: "b68967e2",
       chain_id: 80001,
       network: "polygon-mumbai"
@@ -25,13 +31,13 @@ const qrProofRequestJson = {
         query: {
           allowedIssuers: ["*"],
           context:
-            "https://raw.githubusercontent.com/iden3/claim-schema-vocab/main/schemas/json-ld/kyc-v3.json-ld",
+            "https://raw.githubusercontent.com/elysia-dev/ZKredit/main/contracts/schemas/json-ld/kyc-v2.jsonld",
           credentialSubject: {
-            birthday: {
-              $lt: 20020101
+            creditScore: {
+              $gt: 100
             }
           },
-          type: "KYCAgeCredential"
+          type: "KYCPersonalCreditCredential"
         }
       }
     ]
@@ -42,8 +48,50 @@ export default function Home() {
   useEffect(() => {
     initFlowbite()
   }, [])
-  // TODO : Fetch account's NFT
   const { Canvas } = useQRCode();
+  const { address } = useAccount();
+
+  const {data: nextId, isLoading, error } = useContractRead({
+    address: process.env.NEXT_PUBLIC_NFT_ADDRESS,
+    abi: nftAbi,
+    functionName: 'nextId',
+    onError(error) {
+      console.log(error)
+    }
+  })
+
+  const { data: owners, isLoading: ownersLoading, error: nftsError } = useContractReads({
+    contracts: nextId ? _.range(0, Number(nextId)).map((id) => {
+      return {
+        address: process.env.NEXT_PUBLIC_NFT_ADDRESS,
+        abi: nftAbi,
+        functionName: 'ownerOf',
+        args: [id]
+      }
+    }) : []
+  })
+
+
+  useContractEvent({
+    address: process.env.NEXT_PUBLIC_NFT_ADDRESS,
+    abi: nftAbi,
+    eventName: 'Transfer',
+    listener(log) {
+      let parsed = transferInterface.parseLog(log)
+      const { from, to, tokenId } = parsed.args
+
+      console.log(from)
+      console.log(to)
+      console.log(tokenId)
+
+      if (
+        log.topics[1] === constants.AddressZero ||
+        log.topics[2] === address
+      ) {
+        console.log("hello!!")
+      }
+    },
+  })
 
   return (
     <div>
@@ -86,9 +134,15 @@ export default function Home() {
       </div>
       <div className="flex justify-center items-center">
         <div className="grid grid-cols-3 gap-2">
-          <Item tokenId={1} />
-          <Item tokenId={2} />
-          <Item tokenId={3} />
+          {
+            !ownersLoading && owners?.map((owner, index) => {
+              if(owner.result === address){
+                return <Item tokenId={index} key={index}/>
+              } else {
+                return <></>
+              }
+            })
+          }
         </div>
       </div>
     </div>
