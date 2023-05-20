@@ -6,7 +6,7 @@
       "id": "@id",
       "type": "@type",
       "KYCPersonalCreditCredential": {
-        "@id": "https://raw.githubusercontent.com/elysia-dev/ZKredit/main/contracts/schemas/json-ld/kyc-v1.json-ld#KYCPersonalCreditCredential",
+        "@id": "https://raw.githubusercontent.com/elysia-dev/ZKredit/main/contracts/schemas/json-ld/kyc-v1.jsonld#KYCPersonalCreditCredential",
         "@context": {
           "@version": 1.1,
           "@protected": true,
