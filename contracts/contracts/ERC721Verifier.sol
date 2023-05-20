@@ -12,18 +12,16 @@ contract ERC721Verifier is ERC721, ZKPVerifier {
 
     mapping(uint256 => address) public idToAddress;
     mapping(address => uint256) public addressToId;
-    mapping(uint256 => uint256) idToTotalBorrowed;
+    mapping(uint256 => uint256) public idToTotalBorrowed;
 
     constructor(string memory name_, string memory symbol_)
     ERC721(name_, symbol_)
     {}
 
-    function totalBorrowed(address borrower) external {
+    function totalBorrowed(address borrower) external view returns(uint256) {
         uint256 id = addressToId[borrower];
         require(id != 0, "No registered id");
-        uint256 totalBorrowed = idToTotalBorrowed[id];
-
-        return totalBorrowed;
+        return idToTotalBorrowed[id];
     }
 
     function afterBorrow(address borrower, uint256 amount) external {
@@ -66,14 +64,14 @@ contract ERC721Verifier is ERC721, ZKPVerifier {
             "proof can not be submitted more than once"
         );
 
-        // get user id
-        uint256 id = inputs[1];
-        // additional check didn't get airdrop tokens before
-        if (idToAddress[id] == address(0) && addressToId[_msgSender()] == 0 ) {
-            super._mint(_msgSender(), nextId++);
-            addressToId[_msgSender()] = id;
-            idToAddress[id] = _msgSender();
+        uint256 userId = inputs[1];
+
+        if (idToAddress[userId] == address(0) && addressToId[_msgSender()] == 0) {
+            addressToId[_msgSender()] = userId;
+            idToAddress[userId] = _msgSender();
         }
+
+        super._mint(_msgSender(), nextId++);
     }
 
     function _beforeTokenTransfer(

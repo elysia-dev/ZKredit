@@ -15,17 +15,18 @@ contract LendingPool is Ownable {
 
     uint256 public MAX_BORROW = 10000 * 1e18;
 
-    constructor(address _token, ERC721Verifier _verifier) {
+    constructor(IERC20 _token, ERC721Verifier _verifier) {
         token = _token;
         verifier = _verifier;
     }
 
+    /// @dev need to approve
     function deposit(uint256 amount) public {
         address user = msg.sender;
-        token.transferFrom(user, amount);
+        token.transferFrom(user, address(this), amount);
     }
 
-    function borrow(uint256 user, uint256 amount) public onlyOwner {
+    function borrow(address user, uint256 amount) public {
         require(verifier.totalBorrowed(user) + amount <= MAX_BORROW, "MaxBorrowExceeded");
 
         debt[user] += amount;
@@ -33,10 +34,11 @@ contract LendingPool is Ownable {
         verifier.afterBorrow(user, amount);
     }
 
+    /// @dev need to approve
     function repay(uint256 amount) public {
         address user = msg.sender;
         debt[user] -= amount;
-        token.transferFrom(user, amount);
+        token.transferFrom(user, address(this), amount);
         verifier.afterRepay(user, amount);
     }
 
