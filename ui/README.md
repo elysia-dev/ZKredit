@@ -4,6 +4,10 @@ This folder contains the frontend of the ZKredit application.
 
 The frontend is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) and deployed on [Vercel](https://github.com/vercel/vercel).
 
+## Setup Envs
+Write `.env` file in root.
+See `env.exmple`
+
 ## Install dependencies
 
 ```bash
