@@ -23,6 +23,6 @@ const deployFn: DeployFunction = async function (hre) {
   })
 }
 
-deployFn.tags = ["testnet", "mainnet"]
+deployFn.tags = ["testnet", "mainnet", "ERC721Verifier"]
 
 export default deployFn

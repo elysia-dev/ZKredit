@@ -45,4 +45,8 @@ contract LendingPool is Ownable {
     function updateMaxBorrow(uint256 _maxBorrow) public onlyOwner {
         MAX_BORROW = _maxBorrow;
     }
+
+    function updateVerifier(ERC721Verifier _verifier) public onlyOwner {
+        verifier = _verifier;
+    }
 }
