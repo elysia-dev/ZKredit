@@ -6,7 +6,7 @@ const deployFn: DeployFunction = async function (hre) {
   const { deployer } = await getNamedAccounts()
 
   const verifierContract = "ERC721Verifier";
-  const verifierName = "ERC721zkAirdrop";
+  const verifierName = "ERC721ZKVerifier";
   const verifierSymbol = "zkERC721";
 
   const spongePoseidonLib = "0x12d8C87A61dAa6DD31d8196187cFa37d1C647153";

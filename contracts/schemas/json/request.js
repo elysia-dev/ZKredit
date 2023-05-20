@@ -26,7 +26,7 @@ const qrProofRequestJson = {
             "https://raw.githubusercontent.com/elysia-dev/ZKredit/main/contracts/schemas/json-ld/kyc-v2.jsonld",
           credentialSubject: {
             creditScore: {
-              $gt: 100
+              $gt: 900
             }
           },
           type: "KYCPersonalCreditCredential"
