@@ -12,13 +12,13 @@ contract ERC721Verifier is ERC721, ZKPVerifier {
 
     mapping(uint256 => address) public idToAddress;
     mapping(address => uint256) public addressToId;
-    mapping(uint256 => uint256) public idToTotalBorrowed;
+    mapping(uint256 => uint256) idToTotalBorrowed;
 
     constructor(string memory name_, string memory symbol_)
     ERC721(name_, symbol_)
     {}
 
-    function validateBorrow(address borrower, uint256 amount) external {
+    function totalBorrowed(address borrower) external {
         uint256 id = addressToId[borrower];
         require(id != 0, "No registered id");
         uint256 totalBorrowed = idToTotalBorrowed[id];
