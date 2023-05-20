@@ -1,0 +1,33 @@
+{
+  "@context": [
+    {
+      "@version": 1.1,
+      "@protected": true,
+      "id": "@id",
+      "type": "@type",
+      "KYCPersonalCreditCredential": {
+        "@id": "https://raw.githubusercontent.com/elysia-dev/ZKredit/main/contracts/schemas/json-ld/kyc-v1.jsonld#KYCPersonalCreditCredential",
+        "@context": {
+          "@version": 1.1,
+          "@protected": true,
+          "id": "@id",
+          "type": "@type",
+          "kyc-vocab": "https://github.com/elysia-dev/ZKredit/blob/main/contracts/schemas/vocab/kyc.md#",
+          "xsd": "http://www.w3.org/2001/XMLSchema#",
+          "creditScore": {
+            "@id": "kyc-vocab:creditScore",
+            "@type": "xsd:integer"
+          },
+          "averageIncome": {
+            "@id": "kyc-vocab:averageIncome",
+            "@type": "xsd:integer"
+          },
+          "totalDebt": {
+            "@id": "kyc-vocab:totalDebt",
+            "@type": "xsd:integer"
+          },
+        }
+      }
+    }
+  ]
+}
