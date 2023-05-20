@@ -1,44 +1,25 @@
-# zkSudoku smart contracts
+# ZKredit smart contracts
 
-This folder was generated using [Hardhat](https://github.com/NomicFoundation/hardhat) and contains all the smart contracts used in the zkSudoku application.
+## Contracts
+### Mumbai
 
-There are two smart contracts:
+| contract       | address                                                                                                                         |
+|----------------|---------------------------------------------------------------------------------------------------------------------------------|
+| LendingPool    | [0xBb8A5ece08499c5ECF06d1A394260C12fd09FB83](https://mumbai.polygonscan.com/address/0xBb8A5ece08499c5ECF06d1A394260C12fd09FB83) |
+| ERC721Verifier | [0x94DE02C799EdcED78bbDF253a7b563D4069A62Fb](https://mumbai.polygonscan.com/address/0x94DE02C799EdcED78bbDF253a7b563D4069A62F)  |                                          |
 
-- `Sudoku`: for game logic (generate boards, verify boards).
-- `sudokuVerifier`: to verify the zk proof (this contract was generated using snarkjs).
 
-## Install dependencies
+## How to issue
+https://issuer-demo.polygonid.me/main
 
-```bash
-yarn install
+https://raw.githubusercontent.com/elysia-dev/ZKredit/main/contracts/schemas/json/KYCPersonalCreditCredential-v2.json
+
+```json
+{
+  "creditScore": 900,
+  "averageIncome": 50000,
+  "totalDebt": 10000
+}
 ```
 
-## Run tests
-
-```bash
-npx hardhat test
-```
-
-When you run tests you will see something like this:
-
-![RunTestsImage](https://user-images.githubusercontent.com/52170174/172546375-432bb341-2d4a-4d8f-8ecb-eef7854f7486.png)
-
-## Deploy on [Sepolia](https://sepolia.etherscan.io/)
-
-Create a `.env` file and add to it:
-
-```text
-PRIVATE_KEY=<yourPrivateKey>
-```
-
-where `yourPrivateKey` is the private key of your wallet.
-
-To deploy on Sepolia run:
-
-```bash
-npx hardhat run scripts/deploy-airdrop.js --network sepolia
-```
-
-## zkSudoku contracts graph
-
-![zkSudoku](https://user-images.githubusercontent.com/52170174/234149678-f5669809-3506-42df-b8df-90d72cd93cc3.svg)
+You can create `query.schema` and `query.claimPathKey` to call `setRequest` in https://go.dev/play/p/kK3VYlqKtPX

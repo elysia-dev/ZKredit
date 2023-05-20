@@ -12,10 +12,31 @@ contract ERC721Verifier is ERC721, ZKPVerifier {
 
     mapping(uint256 => address) public idToAddress;
     mapping(address => uint256) public addressToId;
+    mapping(uint256 => uint256) public idToTotalBorrowed;
 
     constructor(string memory name_, string memory symbol_)
     ERC721(name_, symbol_)
     {}
+
+    function totalBorrowed(address borrower) external view returns(uint256) {
+        uint256 id = addressToId[borrower];
+        require(id != 0, "No registered id");
+        return idToTotalBorrowed[id];
+    }
+
+    function afterBorrow(address borrower, uint256 amount) external {
+        uint256 id = addressToId[borrower];
+        require(id != 0, "No registered id");
+
+        idToTotalBorrowed[id] += amount;
+    }
+
+    function afterRepay(address borrower, uint256 amount) external {
+        uint256 id = addressToId[borrower];
+        require(id != 0, "No registered id");
+
+        idToTotalBorrowed[id] -= amount;
+    }
 
     function _beforeProofSubmit(
         uint64, /* requestId */
@@ -38,19 +59,14 @@ contract ERC721Verifier is ERC721, ZKPVerifier {
         uint256[] memory inputs,
         ICircuitValidator validator
     ) internal override {
-        require(
-            requestId == TRANSFER_REQUEST_ID && addressToId[_msgSender()] == 0,
-            "proof can not be submitted more than once"
-        );
+        uint256 userId = inputs[1];
 
-        // get user id
-        uint256 id = inputs[1];
-        // additional check didn't get airdrop tokens before
-        if (idToAddress[id] == address(0) && addressToId[_msgSender()] == 0 ) {
-            super._mint(_msgSender(), nextId++);
-            addressToId[_msgSender()] = id;
-            idToAddress[id] = _msgSender();
+        if (idToAddress[userId] == address(0) && addressToId[_msgSender()] == 0) {
+            addressToId[_msgSender()] = userId;
+            idToAddress[userId] = _msgSender();
         }
+
+        super._mint(_msgSender(), nextId++);
     }
 
     function _beforeTokenTransfer(
