@@ -1,8 +1,11 @@
 # ZKredit
-
-ZKedit is a credit defi that allows borrowers to borrow crypto with their credit issued by a trust party.
+ZKedit is a credit protocol that allows users to borrow crypto with their credit information issued by trusted parties.
 - slides: https://drive.google.com/file/d/1nzdDGfwVjyEPwzsz9S_A9cjklE4wVRaA/view?usp=sharing
 - demo: https://www.youtube.com/watch?v=oH12eSN-5Mg
+
+
+![demo-image](https://github.com/elysia-dev/ZKredit/assets/18223805/3713e39d-f319-45b3-8bd4-f3c9c9055ba4)
+
 
 ## Run Locally
 ### Run contracts
